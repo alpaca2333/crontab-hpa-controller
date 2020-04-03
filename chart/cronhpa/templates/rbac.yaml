@@ -1,0 +1,56 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cron-hpa-controller-role
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs:
+    - get
+    - list
+    - watch
+    - update
+- apiGroups:
+    - extensions
+  resources: ["*"]
+  verbs:
+    - get
+    - list
+    - watch
+    - update
+- apiGroups:
+    - apps
+  resources: ["*"]
+  verbs:
+    - get
+    - list
+    - watch
+    - update
+- apiGroups:
+    - autoscaling
+  resources: ["*"]
+  verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "cronhpa.serviceAccountName" . }}-cron-hpa-controller-role-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cron-hpa-controller-role
+subjects:
+- kind: ServiceAccount
+  name: {{ include "cronhpa.name" $ }}-sa
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "cronhpa.name" $ }}-sa
