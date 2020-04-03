@@ -28,13 +28,15 @@ You can refer to the logs to check if the controller works as expected. Grep dep
 ```
 $> kubectl logs -f cronhpacontroller-7c5446789f-97wvk cronhpa | grep "act10"
 
-  time="2020-04-03T02:24:55Z" level=info msg="Job will be added: act10@\"[\n  {\"schedule\": \"1 * * * *\", \"replicas\": 4, \"minReplicas\": 5},  \n  {\"schedule\": \"1 * * * *\", \"replicas\": 4, \"maxReplicas\": 6}\n]\n\""
-  time="2020-04-03T02:24:55Z" level=debug msg="Job added: act10 | 4 | 5 | 0"
-  time="2020-04-03T02:24:55Z" level=debug msg="Job added: act10 | 4 | 0 | 6"
-  time="2020-04-03T02:24:55Z" level=info msg="Cron jobs for \"act10\" is started."
-  time="2020-04-03T02:25:01Z" level=info msg="\"act10\" replicas is set to 4"
-  time="2020-04-03T02:25:01Z" level=info msg="\"act10\" replicas is set to 4"
+time="2020-04-03T02:24:55Z" level=info msg="Job will be added: act10@\"[\n  {\"schedule\": \"1 * * * *\", \"replicas\": 4, \"minReplicas\": 5},  \n  {\"schedule\": \"1 * * * *\", \"replicas\": 4, \"maxReplicas\": 6}\n]\n\""
+time="2020-04-03T02:24:55Z" level=debug msg="Job added: act10 | 4 | 5 | 0"
+time="2020-04-03T02:24:55Z" level=debug msg="Job added: act10 | 4 | 0 | 6"
+time="2020-04-03T02:24:55Z" level=info msg="Cron jobs for \"act10\" is started."
+time="2020-04-03T02:25:01Z" level=info msg="\"act10\" replicas is set to 4"
+time="2020-04-03T02:25:01Z" level=info msg="\"act10\" replicas is set to 4"
 ```
+
+Adding/Modifying/Deleting the annotation or adding/deleting the hpa, the controller will make corresponding changes to crontabs. 
 
 ## Build
 ```shell script
@@ -47,4 +49,4 @@ Docker build -f build/Dockerfile -t cronhpa .
 ## TODO
 + Better log viewing experience.
 + Install a unique controller in the namespace `kube-system` and enable the function by labeling a namespace.
-+ Docker multi-stages build.
++ Docker multi-stages building.
