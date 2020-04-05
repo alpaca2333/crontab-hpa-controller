@@ -19,8 +19,8 @@ metadata:
   annotations:
     qsun.tencent.com/cronhpa: |
       [
-        {"schedule": "1 * * * *", "replicas": 4, "replicas": 10},
-        {"schedule": "1 * * * *", "replicas": 4, "minReplicas": 1, "maxReplicas": 20}
+        {"schedule": "1 * * * *", "replicas": 4},
+        {"schedule": "1 * * * *", "minReplicas": 1, "maxReplicas": 20}
       ]
 ```
 
